@@ -734,6 +734,8 @@ button, input, select, textarea { font: inherit; }
     flex-direction: column;
     align-items: stretch;
     box-shadow: 0 24px 60px rgba(0,0,0,0.15);
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
   }
   @keyframes slideDown {
     from { opacity: 0; transform: translateY(-10px); }

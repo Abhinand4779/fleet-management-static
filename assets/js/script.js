@@ -6,10 +6,9 @@ function showLoader() {
   const loader = document.createElement('div');
   loader.className = 'page-loader';
   loader.innerHTML = `
-    <div class="loader-card futuristic" role="status" aria-live="polite">
-      <div class="loader-ring"></div>
-      <div class="loader-title">Linking Bridges</div>
-      <div class="loader-subtitle">Loading premium transport systems</div>
+    <div class="loader-card futuristic" style="background: transparent; box-shadow: none; border: none; align-items: center;" role="status" aria-live="polite">
+      <div class="loader-hexagon"></div>
+      <div class="loader-title" style="color: #ffffff; letter-spacing: 2px;">LINKING BRIDGES TRANSPORTATION</div>
     </div>`;
   document.body.appendChild(loader);
   document.body.classList.add('is-loading');
@@ -57,7 +56,7 @@ function renderHeader() {
   siteHeader.innerHTML = `
     <div class="container header-inner">
       <a class="brand" href="/index.html">
-        <img class="brand-wordmark" src="/assets/images/logo/lbt-logo-wordmark.png" alt="LBT wordmark">
+        <img class="brand-wordmark" src="/assets/images/logo/lbt_logo_transparent.png" alt="Linking Bridges Transportation Logo">
       </a>
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span>
@@ -96,13 +95,13 @@ function renderFooter() {
   siteFooter.innerHTML = `
     <div class="container footer-grid">
       <div>
-        <a class="brand" href="/index.html" style="margin-bottom: 1rem; display:inline-flex; align-items:center;">
-          <img class="brand-wordmark" src="/assets/images/logo/lbt-logo-wordmark.png" alt="LBT wordmark">
+        <a class="brand" href="/index.html" style="margin-bottom: 1.5rem; display:inline-flex; align-items:center;">
+          <img class="brand-wordmark" src="/assets/images/logo/lbt_logo_transparent.png" alt="Linking Bridges Transportation Logo" style="filter: brightness(0) invert(1);">
         </a>
-        <p>Premium fleet management solutions with reliable transport, customs support, warehousing and delivery services tailored to demanding operations.</p>
-        <div style="margin-top:0.85rem; font-size:0.95rem; color:rgba(255,255,255,0.9);">
-          <strong>Head Office</strong>
-          <div style="margin-top:0.4rem; line-height:1.4; color:var(--muted);">
+        <p style="margin-bottom: 2rem;">Premium fleet management solutions with reliable transport, customs support, warehousing and delivery services tailored to demanding operations.</p>
+        <div style="font-size:0.95rem; color:rgba(255,255,255,0.9);">
+          <strong style="color: white; font-size: 1.1rem; text-transform: uppercase;">Head Office</strong>
+          <div style="margin-top:0.5rem; line-height:1.6; color:#a0a0a0;">
             7831, Al Khaboub, Al Fadeylah District<br />Jeddah, 22543<br />Kingdom of Saudi Arabia
           </div>
         </div>
@@ -131,17 +130,17 @@ function renderFooter() {
         <p>Receive insights on fleet operations and service updates.</p>
         <form class="newsletter">
           <input type="email" placeholder="Email address" aria-label="Email address">
-          <button class="btn btn-primary" type="submit">Join</button>
+          <button class="btn btn-primary" type="submit" style="padding: 1rem 2rem;">JOIN</button>
         </form>
       </div>
     </div>
-    <div class="container footer-grid" style="margin-top:1rem; gap:1rem;">
-      <div>
-        <h4>Contact</h4>
-        <p style="color:var(--muted); line-height:1.45;">Email: <a href="mailto:info@linkingbridges.net">info@linkingbridges.net</a><br />Phone: <a href="tel:+966553311591">+966553311591</a></p>
+    <div class="container footer-bottom">
+      <div class="contact-info">
+        <p><strong>Email:</strong> <a href="mailto:info@linkingbridges.net">info@linkingbridges.net</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+966553311591">+966553311591</a></p>
       </div>
-      <div>
-        <p style="color:var(--muted);">© ${year} FleetMotive. All rights reserved. ISO 9001 certified logistics operations.</p>
+      <div class="copyright">
+        <p>© ${year} Linking Bridges. All rights reserved. ISO 9001 certified logistics operations.</p>
       </div>
     </div>`;
 }

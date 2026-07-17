@@ -79,12 +79,15 @@ function renderHeader() {
   });
 
   document.querySelectorAll('.dropdown').forEach((item) => {
-    item.addEventListener('click', (event) => {
-      if (window.innerWidth <= 760) {
-        event.preventDefault();
-        item.classList.toggle('open');
-      }
-    });
+    const mainLink = item.querySelector('a');
+    if (mainLink) {
+      mainLink.addEventListener('click', (event) => {
+        if (window.innerWidth <= 1024) {
+          event.preventDefault();
+          item.classList.toggle('open');
+        }
+      });
+    }
   });
 }
 

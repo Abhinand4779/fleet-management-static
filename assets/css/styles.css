@@ -440,7 +440,6 @@ textarea {
   object-position: center right;
   opacity: 0.8;
   animation: zoomBg 20s infinite alternate linear;
-
 }
 
 @keyframes zoomBg {
@@ -493,9 +492,12 @@ animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
   .hero-image {
-    position: relative;
-    width: 100%;
-    height: auto;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    z-index: 0;
     order: 2;
   }
 

@@ -1,38 +1,560 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gallery | Linking Bridge Transportation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/assets/css/styles.css" />
-  </head>
-  <body>
-    <header id="site-header"></header>
-    <main class="container section">
-      <div class="page-hero reveal">
-        <div class="hero-copy">
-          <div class="breadcrumb"><a href="/index.html">Home</a> / Gallery</div>
-          <div class="eyebrow">OUR GALLERY</div>
-          <h1>Excellence in motion.</h1>
-          <p class="section-intro">Explore our premium fleet, modern warehousing facilities, and professional operations in action across Saudi Arabia.</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore Linking Bridge Transportation's fleet, operations, warehousing and freight services through our professional photo gallery." />
+  <title>Gallery | Linking Bridge Transportation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <style>
+    /* ── Gallery Page Specific Styles ── */
+    .gallery-hero {
+      position: relative;
+      height: 55vh;
+      min-height: 340px;
+      max-height: 520px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .gallery-hero-bg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .gallery-hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      filter: brightness(0.45);
+    }
+
+    .gallery-hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 3rem 0 3.5rem;
+    }
+
+    .gallery-hero-content .breadcrumb {
+      margin-bottom: 0.8rem;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .gallery-hero-content .breadcrumb a {
+      color: rgba(255,255,255,0.65);
+    }
+
+    .gallery-hero-content h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      color: #fff;
+      margin: 0 0 0.6rem;
+      letter-spacing: -0.03em;
+    }
+
+    .gallery-hero-content p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.1rem;
+      max-width: 560px;
+      margin: 0;
+    }
+
+    /* ── Filter Tabs ── */
+    .gallery-filters {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding: 2.5rem 0 0;
+    }
+
+    .filter-btn {
+      padding: 0.55rem 1.4rem;
+      border-radius: 50px;
+      border: 2px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 300ms var(--transition);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      box-shadow: 0 4px 16px var(--primary-glow);
+    }
+
+    /* ── Bento / Masonry Grid ── */
+    .gallery-bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 80px;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    /* Card base */
+    .gb-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 400ms var(--transition), box-shadow 400ms var(--transition);
+    }
+
+    .gb-card:hover {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: var(--shadow-xl);
+      z-index: 2;
+    }
+
+    .gb-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 700ms cubic-bezier(0.25,0.8,0.25,1);
+      display: block;
+      filter: none !important;
+    }
+
+    .gb-card:hover img {
+      transform: scale(1.07);
+    }
+
+    /* Caption overlay */
+    .gb-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.8rem 1.5rem 1.3rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, transparent 100%);
+      transform: translateY(4px);
+      opacity: 0;
+      transition: all 400ms var(--transition);
+    }
+
+    .gb-card:hover .gb-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gb-cat {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--primary);
+      margin-bottom: 0.35rem;
+    }
+
+    .gb-caption h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: white;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    /* Expand icon */
+    .gb-expand {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 300ms var(--transition);
+      color: white;
+    }
+
+    .gb-card:hover .gb-expand {
+      opacity: 1;
+    }
+
+    /* ── Grid Layout — Bento Spans ── */
+    /* Row 1-2: Full hero */
+    .gb-card-hero   { grid-column: 1 / 8;  grid-row: 1 / 6; }
+    /* Row 1-2: Right tall */
+    .gb-card-tall1  { grid-column: 8 / 13; grid-row: 1 / 4; }
+    .gb-card-tall2  { grid-column: 8 / 13; grid-row: 4 / 6; }
+    /* Row 3-4 */
+    .gb-card-wide1  { grid-column: 1 / 5;  grid-row: 6 / 10; }
+    .gb-card-wide2  { grid-column: 5 / 9;  grid-row: 6 / 10; }
+    .gb-card-wide3  { grid-column: 9 / 13; grid-row: 6 / 10; }
+    /* Row 5 */
+    .gb-card-full   { grid-column: 1 / 13; grid-row: 10 / 14; }
+
+    /* Ensure hidden items for filtering */
+    .gb-card[hidden] {
+      display: none;
+    }
+
+    /* ── Lightbox ── */
+    .gallery-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .gallery-lightbox.open {
+      display: flex;
+    }
+
+    .lb-inner {
+      position: relative;
+      max-width: 1100px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .lb-inner img {
+      max-width: 100%;
+      max-height: 78vh;
+      object-fit: contain;
+      border-radius: 12px;
+      filter: none !important;
+    }
+
+    .lb-caption {
+      text-align: center;
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+    }
+
+    .lb-close {
+      position: absolute;
+      top: -1rem;
+      right: -0.5rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 250ms;
+    }
+
+    .lb-close:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      color: white;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 250ms;
+    }
+
+    .lb-nav:hover { background: var(--primary); border-color: var(--primary); }
+    .lb-prev { left: -4rem; }
+    .lb-next { right: -4rem; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .gallery-bento {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 200px;
+        gap: 0.8rem;
+      }
+      .gb-card-hero,
+      .gb-card-tall1,
+      .gb-card-tall2,
+      .gb-card-wide1,
+      .gb-card-wide2,
+      .gb-card-wide3,
+      .gb-card-full {
+        grid-column: auto;
+        grid-row: auto;
+      }
+      .gb-card-hero  { grid-column: 1 / 3; }
+      .gb-card-full  { grid-column: 1 / 3; }
+      .lb-prev { left: -0.5rem; }
+      .lb-next { right: -0.5rem; }
+      .gb-caption { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 560px) {
+      .gallery-bento {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 230px;
+      }
+      .gb-card-hero,
+      .gb-card-full { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header id="site-header"></header>
+
+
+  <!-- Cinematic Page Hero -->
+  <div class="container" style="padding-top: 0; padding-bottom: 0;">
+    <div class="cin-hero">
+      <div class="cin-hero-bg">
+        <img src="/assets/images/gallery/container-img.avif" alt="Aerial view of port operations at night" />
+      </div>
+      <div class="cin-hero-content">
+        <div class="breadcrumb"><a href="/index.html">Home</a> / Gallery</div>
+        <div class="cin-eyebrow">Our Gallery</div>
+        <h1>Excellence in Motion.</h1>
+        <p class="cin-hero-sub">Real operations, real fleet, real results — across roads, ports and warehouses throughout Saudi Arabia.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <main class="container">
+
+    <!-- ── Filter Tabs ── -->
+    <div class="gallery-filters" id="galleryFilters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="fleet">Fleet &amp; Trucks</button>
+      <button class="filter-btn" data-filter="port">Port &amp; Shipping</button>
+      <button class="filter-btn" data-filter="operations">Operations</button>
+    </div>
+
+    <!-- ── Bento Grid ── -->
+    <div class="gallery-bento" id="galleryGrid">
+
+      <!-- HERO CARD — LBT branded truck, Saudi skyline -->
+      <div class="gb-card gb-card-hero reveal" data-cat="fleet" data-img="/assets/images/gallery/truck.jpg.jpeg" data-label="Linking Bridges Transportation — Saudi Arabia">
+        <img src="/assets/images/gallery/truck.jpg.jpeg" alt="LBT branded truck on Saudi Arabian highway with Riyadh skyline" />
+        <div class="gb-caption">
+          <div class="gb-cat">Fleet</div>
+          <h3>Our Fleet on the Move</h3>
         </div>
-        <div class="page-hero-image">
-          <img src="/assets/images/gallery/machine-img.webp" alt="Logistics Gallery" />
+        <div class="gb-expand">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
         </div>
       </div>
-      <section class="gallery-grid section-sm">
-        <article class="card gallery-card reveal"><img src="/assets/images/gallery/truck-img1.jpeg" alt="Heavy vehicle on route" /><div class="caption"><h3>Fleet in motion</h3><p>Premium road transport with controlled routing and visibility.</p></div></article>
-        <article class="card gallery-card reveal"><img src="/assets/images/gallery/truck-img2.avif" alt="Operations hub in action" /><div class="caption"><h3>Operations command</h3><p>Coordinated oversight across scheduling, tracking and customer support.</p></div></article>
-        <article class="card gallery-card reveal"><img src="/assets/images/gallery/container-img.avif" alt="Warehouse with pallets and forklift" /><div class="caption"><h3>Warehouse handling</h3><p>Secure storage, inventory control and dependable motion through facilities.</p></div></article>
-        <article class="card gallery-card reveal"><img src="/assets/images/gallery/machine-img.webp" alt="Packing and moving team" /><div class="caption"><h3>Packaging and relocation</h3><p>Careful packing, loading and transition support.</p></div></article>
-        <article class="card gallery-card reveal"><img src="/assets/images/gallery/container-img.avif" alt="Customs desk and documentation" /><div class="caption"><h3>Customs coordination</h3><p>Fast, accurate documentation and compliance support.</p></div></article>
-        <article class="card gallery-card reveal"><img src="/assets/images/gallery/truck-img1.jpeg" alt="Delivery vehicle on the road" /><div class="caption"><h3>Last-mile delivery</h3><p>Flexible support for final handoffs and on-time distribution.</p></div></article>
-      </section>
-    </main>
-    <footer id="site-footer"></footer>
-    <script src="/assets/js/script.js"></script>
-  </body>
+
+      <!-- TALL RIGHT TOP — Highway convoy -->
+      <div class="gb-card gb-card-tall1 reveal" data-cat="fleet" data-img="/assets/images/gallery/108c984febcd771d13f4774865e8940a.jpg" data-label="Highway freight convoy at twilight">
+        <img src="/assets/images/gallery/108c984febcd771d13f4774865e8940a.jpg" alt="Fleet trucks driving in convoy at dusk" />
+        <div class="gb-caption">
+          <div class="gb-cat">Fleet</div>
+          <h3>Highway Convoy</h3>
+        </div>
+        <div class="gb-expand"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+      </div>
+
+      <!-- TALL RIGHT BOTTOM — Crane + truck at night -->
+      <div class="gb-card gb-card-tall2 reveal" data-cat="operations" data-img="/assets/images/gallery/container-img2.jpg" data-label="Crane loading container onto truck at night">
+        <img src="/assets/images/gallery/container-img2.jpg" alt="Container crane loading truck in the rain at night" />
+        <div class="gb-caption">
+          <div class="gb-cat">Operations</div>
+          <h3>Night Operations</h3>
+        </div>
+        <div class="gb-expand"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+      </div>
+
+      <!-- ROW 3 — Transport yard -->
+      <div class="gb-card gb-card-wide1 reveal" data-cat="fleet" data-img="/assets/images/gallery/transportation-img1.jpg" data-label="Fleet trucks at container yard, sunset">
+        <img src="/assets/images/gallery/transportation-img1.jpg" alt="Fleet trucks parked at container storage yard at sunset" />
+        <div class="gb-caption">
+          <div class="gb-cat">Fleet</div>
+          <h3>Fleet Yard</h3>
+        </div>
+        <div class="gb-expand"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+      </div>
+
+      <!-- ROW 3 — Crane lifting container -->
+      <div class="gb-card gb-card-wide2 reveal" data-cat="port" data-img="/assets/images/gallery/transpotation-img2.jpg" data-label="Crane lifting shipping container at port">
+        <img src="/assets/images/gallery/transpotation-img2.jpg" alt="Port crane lifting shipping container with truck below" />
+        <div class="gb-caption">
+          <div class="gb-cat">Port</div>
+          <h3>Port Lifting Operations</h3>
+        </div>
+        <div class="gb-expand"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+      </div>
+
+      <!-- ROW 3 — Forklift loading dock -->
+      <div class="gb-card gb-card-wide3 reveal" data-cat="operations" data-img="/assets/images/gallery/machine-img.webp" data-label="Forklift loading cargo into refrigerated truck">
+        <img src="/assets/images/gallery/machine-img.webp" alt="Forklift loading freight at warehouse loading dock" />
+        <div class="gb-caption">
+          <div class="gb-cat">Operations</div>
+          <h3>Loading &amp; Dispatch</h3>
+        </div>
+        <div class="gb-expand"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+      </div>
+
+      <!-- FULL WIDTH — Sunset cargo ship -->
+      <div class="gb-card gb-card-full reveal" data-cat="port" data-img="/assets/images/gallery/download.jpg" data-label="Cargo container ship at sunset">
+        <img src="/assets/images/gallery/download.jpg" alt="Large container cargo ship sailing at sunset" style="object-position: center 60%;" />
+        <div class="gb-caption">
+          <div class="gb-cat">Sea Freight</div>
+          <h3>Global Cargo Movement — Sea to Shore</h3>
+        </div>
+        <div class="gb-expand"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+      </div>
+
+    </div><!-- /gallery-bento -->
+
+    <!-- Second row of cards -->
+    <div class="gallery-bento" id="galleryGrid2" style="margin-top: 0;">
+
+      <!-- Freight ship portrait -->
+      <div class="gb-card gb-card-tall1 reveal" data-cat="port" data-img="/assets/images/gallery/Freight costs are not just rising_ They are being misused_.jpg" data-label="International container freight vessel at sea">
+        <img src="/assets/images/gallery/Freight costs are not just rising_ They are being misused_.jpg" alt="International container cargo ship at sea" />
+        <div class="gb-caption">
+          <div class="gb-cat">Port</div>
+          <h3>International Freight</h3>
+        </div>
+        <div class="gb-expand"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+      </div>
+
+      <!-- Aerial port -->
+      <div class="gb-card gb-card-hero reveal" data-cat="port" data-img="/assets/images/gallery/container-img.avif" data-label="Aerial view of container port at night">
+        <img src="/assets/images/gallery/container-img.avif" alt="Aerial drone shot of container port with cranes lit at night" />
+        <div class="gb-caption">
+          <div class="gb-cat">Port</div>
+          <h3>Port Command — Aerial View</h3>
+        </div>
+        <div class="gb-expand"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+      </div>
+
+    </div><!-- /galleryGrid2 -->
+
+  </main>
+
+  <!-- ── Lightbox ── -->
+  <div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <div class="lb-inner">
+      <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+      <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="lb-nav lb-next" id="lbNext" aria-label="Next">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <img id="lbImg" src="" alt="" />
+      <p class="lb-caption" id="lbCaption"></p>
+    </div>
+  </div>
+
+  <footer id="site-footer"></footer>
+  <script src="/assets/js/script.js"></script>
+  <script>
+    // ── Filter Logic ──
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const allCards   = document.querySelectorAll('.gb-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        allCards.forEach(card => {
+          if (filter === 'all' || card.dataset.cat === filter) {
+            card.removeAttribute('hidden');
+          } else {
+            card.setAttribute('hidden', '');
+          }
+        });
+      });
+    });
+
+    // ── Lightbox Logic ──
+    const lightbox  = document.getElementById('galleryLightbox');
+    const lbImg     = document.getElementById('lbImg');
+    const lbCaption = document.getElementById('lbCaption');
+    const lbClose   = document.getElementById('lbClose');
+    const lbPrev    = document.getElementById('lbPrev');
+    const lbNext    = document.getElementById('lbNext');
+
+    const cards = Array.from(allCards);
+    let currentIdx = 0;
+
+    function openLightbox(idx) {
+      currentIdx = idx;
+      const card = cards[idx];
+      lbImg.src = card.dataset.img;
+      lbImg.alt = card.dataset.label;
+      lbCaption.textContent = card.dataset.label;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lbImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => openLightbox(i));
+    });
+
+    lbClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+    lbPrev.addEventListener('click', e => {
+      e.stopPropagation();
+      let prev = (currentIdx - 1 + cards.length) % cards.length;
+      // skip hidden
+      while (cards[prev].hasAttribute('hidden') && prev !== currentIdx) prev = (prev - 1 + cards.length) % cards.length;
+      openLightbox(prev);
+    });
+
+    lbNext.addEventListener('click', e => {
+      e.stopPropagation();
+      let next = (currentIdx + 1) % cards.length;
+      while (cards[next].hasAttribute('hidden') && next !== currentIdx) next = (next + 1) % cards.length;
+      openLightbox(next);
+    });
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lbPrev.click();
+      if (e.key === 'ArrowRight') lbNext.click();
+    });
+  </script>
+</body>
 </html>

@@ -1,4 +1,4 @@
-const siteHeader = document.getElementById('site-header');
+﻿const siteHeader = document.getElementById('site-header');
 const siteFooter = document.getElementById('site-footer');
 
 function showLoader() {
@@ -143,7 +143,7 @@ function renderFooter() {
         <p><strong>Phone:</strong> <a href="tel:+966553311591">+966553311591</a></p>
       </div>
       <div class="copyright">
-        <p>© ${year} Linking Bridges. All rights reserved. ISO 9001 certified logistics operations.</p>
+        <p>Â© ${year} Linking Bridges. All rights reserved. ISO 9001 certified logistics operations.</p>
       </div>
     </div>`;
 }
@@ -220,10 +220,155 @@ revealOnScroll();
 animateCounters();
 handleForm();
 
+/* ============================================
+   SCROLL-DRIVEN TRUCK ANIMATION
+   ============================================ */
 const hero = document.querySelector('.hero');
-if (hero) {
+const heroImg = document.querySelector('.hero-image img');
+
+if (hero && heroImg) {
+  if (window.innerWidth > 900) {
+    const scrollIndicator = document.createElement('div');
+    scrollIndicator.className = 'hero-scroll-indicator';
+    scrollIndicator.innerHTML = '<span>Scroll</span>';
+    hero.appendChild(scrollIndicator);
+  }
+
+  let ticking = false;
   window.addEventListener('scroll', () => {
-    const offset = window.scrollY * 0.12;
-    hero.style.backgroundPositionY = `${offset}px`;
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const heroHeight = hero.offsetHeight;
+        const progress = Math.min(scrollY / heroHeight, 1);
+        const translateX = progress * 30;
+        const translateY = progress * -8;
+        const scale = 1 + progress * 0.04;
+        heroImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+        const indicator = document.querySelector('.hero-scroll-indicator');
+        if (indicator) indicator.style.opacity = Math.max(0, 1 - progress * 3);
+        ticking = false;
+      });
+      ticking = true;
+    }
   }, { passive: true });
 }
+
+/* ============================================
+   SERVICES PHOTO CAROUSEL
+   ============================================ */
+(function initServicesCarousel() {
+  const wrapper = document.getElementById('servicesCarousel');
+  if (!wrapper) return;
+
+  const track = document.getElementById('carouselTrack');
+  const dotsContainer = document.getElementById('scDots');
+  const prevBtn = document.getElementById('scPrev');
+  const nextBtn = document.getElementById('scNext');
+  const slides = Array.from(track.querySelectorAll('.sc-slide'));
+  const total = slides.length;
+  let current = 0;
+  let autoTimer = null;
+  let dragStartX = 0;
+  let isDragging = false;
+
+  function getSlidesPerView() {
+    return window.innerWidth >= 900 ? 3 : 1;
+  }
+
+  function getStepCount() {
+    return Math.max(1, total - getSlidesPerView() + 1);
+  }
+
+  function buildDots() {
+    dotsContainer.innerHTML = '';
+    const steps = getStepCount();
+    for (let i = 0; i < steps; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'sc-dot' + (i === current ? ' is-active' : '');
+      dot.setAttribute('aria-label', 'Slide group ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function getSlideOffset() {
+    const slideEl = slides[0];
+    if (!slideEl) return 0;
+    const gap = window.innerWidth >= 900 ? 24 : 0;
+    return slideEl.offsetWidth + gap;
+  }
+
+  function updateUI() {
+    const offset = getSlideOffset();
+    track.style.transform = 'translateX(-' + (current * offset) + 'px)';
+    const perView = getSlidesPerView();
+    slides.forEach((s, i) => {
+      s.classList.toggle('is-active', i >= current && i < current + perView);
+    });
+    dotsContainer.querySelectorAll('.sc-dot').forEach((d, i) => {
+      d.classList.toggle('is-active', i === current);
+    });
+  }
+
+  function goTo(index) {
+    const maxStep = getStepCount() - 1;
+    current = Math.max(0, Math.min(index, maxStep));
+    updateUI();
+    resetAuto();
+  }
+
+  function resetAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => {
+      const next = (current + 1) >= getStepCount() ? 0 : current + 1;
+      goTo(next);
+    }, 5000);
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  function onDragStart(x) {
+    dragStartX = x;
+    isDragging = true;
+    track.classList.add('is-dragging');
+    clearInterval(autoTimer);
+  }
+
+  function onDragEnd(x) {
+    if (!isDragging) return;
+    isDragging = false;
+    track.classList.remove('is-dragging');
+    const diff = dragStartX - x;
+    if (Math.abs(diff) > 50) {
+      goTo(diff > 0 ? current + 1 : current - 1);
+    } else {
+      resetAuto();
+    }
+  }
+
+  track.addEventListener('mousedown', e => onDragStart(e.clientX));
+  window.addEventListener('mouseup', e => onDragEnd(e.clientX));
+  track.addEventListener('touchstart', e => onDragStart(e.touches[0].clientX), { passive: true });
+  track.addEventListener('touchend', e => onDragEnd(e.changedTouches[0].clientX), { passive: true });
+
+  wrapper.addEventListener('mouseenter', () => clearInterval(autoTimer));
+  wrapper.addEventListener('mouseleave', resetAuto);
+
+  wrapper.setAttribute('tabindex', '0');
+  wrapper.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+    if (e.key === 'ArrowRight') goTo(current + 1);
+  });
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { current = 0; buildDots(); updateUI(); }, 200);
+  });
+
+  buildDots();
+  updateUI();
+  resetAuto();
+})();

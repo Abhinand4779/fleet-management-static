@@ -700,7 +700,7 @@ textarea {
     height: 100%;
     display: block;
     object-fit: cover;
-    object-position: 35% center;
+    object-position: 80% center; /* Focus on the truck on the right side */
     opacity: 0;
     animation: zoomInHero 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   }

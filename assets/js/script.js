@@ -144,7 +144,7 @@ function renderFooter() {
         <p><strong>Phone:</strong> <a href="tel:+966553311591">+966553311591</a></p>
       </div>
       <div class="copyright">
-        <p>Â© ${year} Linking Bridges. All rights reserved. ISO 9001 certified logistics operations.</p>
+        <p>&copy; ${year} Linking Bridges. All rights reserved. ISO 9001 certified logistics operations.</p>
       </div>
     </div>`;
 }

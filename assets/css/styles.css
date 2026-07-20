@@ -2635,7 +2635,7 @@ img:not(.brand-wordmark):not([src*="logo"]):not([src*="ops/"]) {
 .pdf-logo-item {
   height: 40px;
   opacity: 0.5;
-  filter: grayscale(100%);
+  filter: none;
   transition: all 0.3s ease;
 }
 .pdf-logo-item.active-logo {
@@ -2936,14 +2936,15 @@ img:not(.brand-wordmark):not([src*="logo"]):not([src*="ops/"]) {
   height: 70px;
   max-width: 180px;
   object-fit: contain;
-  filter: grayscale(100%) opacity(0.5);
-  transition: filter 0.4s ease, transform 0.4s ease;
+  filter: none !important;
+  opacity: 0.85;
+  transition: opacity 0.4s ease, transform 0.4s ease;
   flex-shrink: 0;
 }
 
 .logo-carousel-track img:hover {
-  filter: grayscale(0%) opacity(1);
-  transform: scale(1.15);
+  opacity: 1;
+  transform: scale(1.1);
 }
 
 @keyframes logoScroll {
@@ -3045,7 +3046,7 @@ img:not(.brand-wordmark):not([src*="logo"]):not([src*="ops/"]) {
 @media (max-width: 768px) {
   .site-header { width: 95% !important; top: 1rem !important; border-radius: 12px !important; }
   .site-header .container { padding: 0 1rem !important; }
-  .site-header .brand-wordmark { height: 32px !important; max-width: 200px !important; }
+  .site-header .brand-wordmark { height: 80px !important; max-width: 350px !important; }
   .mobile-menu-btn { padding: 0.25rem !important; }
   .mobile-menu-btn svg { width: 24px !important; height: 24px !important; }
 }

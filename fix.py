@@ -1,54 +1,38 @@
+import os
 import re
 
-with open('index.html', 'r', encoding='utf-8') as f:
-    html = f.read()
+def process_file(filepath):
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
 
-good_header = """  <title>Linking Bridge Transportation | Premium Fleet Management</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-</head>
+    original = content
 
-<body data-page="index">
-  <header id="site-header"></header>
+    # 1. Fix H1 in pdf-hero
+    content = re.sub(r'(<div class="pdf-hero-content reveal">[\s\S]*?)<h1>', r'\1<h1 class="pdf-hero-headline">', content)
+    
+    # 2. Fix cin-hero-sub
+    content = content.replace('class="cin-hero-sub"', 'style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;"')
+    
+    # 3. Fix pdf-partner content div
+    content = re.sub(r'<section class="pdf-partner">\s*<div class="reveal">', r'<section class="pdf-partner">\n      <div class="pdf-partner-content reveal">', content)
+    content = re.sub(r'<section class="pdf-partner">\s*<div class="pdf-partner-content">\s*<div class="reveal">', r'<section class="pdf-partner">\n      <div class="pdf-partner-content reveal">', content)
+    
+    # 4. Fix section-title
+    content = content.replace('class="section-title"', 'class="pdf-section-title"')
 
-  <main>
-    <section class="hero">
-      <div class="hero-image">
-        <img src="/assets/images/gallery/truck.jpg.jpeg" alt="Linking Bridges Transportation modern fleet in Saudi Arabia" />
-      </div>
-      <div class="hero-content reveal">
-        <div class="eyebrow">Next-Generation Logistics & Fleet Management</div>
-        <h1>Delivering Excellence, <br><span class="text-primary" style="color: var(--primary);">Delivering Tomorrow.</span></h1>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="/pages/contact.html">REQUEST A QUOTE &rarr;</a>
-          <a class="btn btn-outline" href="/pages/services.html">OUR SERVICES &rarr;</a>
-        </div>
-        <div class="hero-badges">
-          <span><i class="icon-clock"></i> 24/7 Live Tracking</span>
-          <span><i class="icon-shield"></i> ISO-Certified</span>
-          <span><i class="icon-truck"></i> Modern Fleet</span>
-        </div>
-      </div>
-    </section>
+    # 5. Fix form section (contact page) to use pdf-trust classes if possible, or just keep it responsive
+    # The contact page has a form, it might be fine.
+    
+    # Update if content changed
+    if content != original:
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(content)
+        print(f"Fixed {filepath}")
+    else:
+        print(f"No changes for {filepath}")
 
-    <section class="stat-strip">
-      <div class="container stat-grid">
-        <div class="stat-card reveal">
-          <strong class="counter" data-target="500" data-suffix="+">0</strong>
-          <span>Vehicles Managed</span>
-        </div>
-        <div class="stat-card reveal">
-          <strong class="counter" data-target="24" data-suffix="/7">0</strong>
-"""
+pages_dir = 'pages'
+files = [f for f in os.listdir(pages_dir) if f.endswith('.html')]
 
-html = re.sub(
-    r'  <meta name="description"\n    content="Linking Bridge Transportation provides premium fleet management, customs clearance, warehousing, moving and delivery services." />\n          <span>Live Tracking</span>',
-    '  <meta name="description" content="Linking Bridge Transportation provides premium fleet management, customs clearance, warehousing, moving and delivery services." />\n' + good_header + '          <span>Live Tracking</span>',
-    html,
-    flags=re.DOTALL
-)
-
-with open('index.html', 'w', encoding='utf-8') as f:
-    f.write(html)
+for file in files:
+    process_file(os.path.join(pages_dir, file))

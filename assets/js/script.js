@@ -40,7 +40,8 @@ function renderHeader() {
   siteHeader.classList.add('site-header');
   const current = window.location.pathname.split('/').pop() || 'index.html';
   const navMarkup = navItems.map((item) => {
-    const active = current === item.href ? 'active' : '';
+    const itemFile = item.href.split('/').pop();
+    const active = current === itemFile ? 'active' : '';
     if (item.children) {
       return `
         <li class="dropdown">
@@ -56,7 +57,7 @@ function renderHeader() {
   siteHeader.innerHTML = `
     <div class="container header-inner">
       <a class="brand" href="/index.html">
-        <img class="brand-wordmark" src="/assets/images/logo/lbt_logo_transparent.png" alt="Linking Bridges Transportation Logo">
+        <img class="brand-wordmark" src="/assets/images/logo/LBT_LOGO_h.png" alt="Linking Bridges Transportation Logo">
       </a>
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span>
@@ -99,7 +100,7 @@ function renderFooter() {
     <div class="container footer-grid">
       <div>
         <a class="brand" href="/index.html" style="margin-bottom: 1.5rem; display:inline-flex; align-items:center;">
-          <img class="brand-wordmark" src="/assets/images/logo/lbt_logo_transparent.png" alt="Linking Bridges Transportation Logo" style="filter: brightness(0) invert(1);">
+          <img class="brand-wordmark" src="/assets/images/logo/LBT_LOGO_h.png" alt="Linking Bridges Transportation Logo" style="filter: brightness(0) invert(1);">
         </a>
         <p style="margin-bottom: 2rem;">Premium fleet management solutions with reliable transport, customs support, warehousing and delivery services tailored to demanding operations.</p>
         <div style="font-size:0.95rem; color:rgba(255,255,255,0.9);">

@@ -2933,16 +2933,16 @@ img:not(.brand-wordmark):not([src*="logo"]):not([src*="ops/"]) {
 }
 
 .logo-carousel-track img {
-  height: 50px;
-  width: 160px;
+  height: 80px;
+  width: 250px;
   object-fit: contain;
   filter: none !important;
   opacity: 1;
   background: #ffffff;
-  padding: 12px 20px;
-  border-radius: 10px;
+  padding: 20px 30px;
+  border-radius: 12px;
   border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   transition: all 0.4s ease;
   flex-shrink: 0;
   box-sizing: content-box;
@@ -4709,4 +4709,32 @@ body.premium-light .btn-download:hover {
   .pdf-partner-images .partner-img {
     height: 300px;
   }
+}
+
+/* ==============================================
+   LOGO BADGE STYLING (NEW)
+   ============================================== */
+.site-header .brand-wordmark,
+.footer-grid .brand-wordmark {
+  background: #ffffff !important;
+  padding: 0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  object-fit: contain;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 90px !important;
+  max-width: 400px !important;
+  width: auto !important;
+}
+
+.site-header .brand-wordmark:hover,
+.footer-grid .brand-wordmark:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.footer-grid .brand-wordmark {
+  height: 100px !important;
+  max-width: 400px !important;
 }

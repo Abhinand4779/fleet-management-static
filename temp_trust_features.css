@@ -1,0 +1,132 @@
+/* ==============================================
+   MODERN TRUST FEATURES (NEW)
+   ============================================== */
+.modern-trust-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+  position: relative;
+  z-index: 10;
+}
+
+.m-trust-card {
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.m-trust-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.m-trust-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: transform 0.4s ease;
+}
+
+.m-trust-card:hover .m-trust-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.m-trust-content {
+  flex-grow: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.m-trust-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.2;
+}
+
+.m-trust-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.85;
+  margin: 0;
+}
+
+.m-trust-number {
+  position: absolute;
+  bottom: -15px;
+  right: 10px;
+  font-size: 6rem;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0.04;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.m-trust-card:hover .m-trust-number {
+  opacity: 0.08;
+}
+
+/* Theme: Dark */
+.m-trust-card.dark-theme {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.m-trust-card.dark-theme .m-trust-icon {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+.m-trust-card.dark-theme .m-trust-title { color: #ffffff; }
+.m-trust-card.dark-theme .m-trust-desc { color: #cbd5e1; }
+.m-trust-card.dark-theme .m-trust-number { color: #ffffff; }
+
+/* Theme: Accent (Red) */
+.m-trust-card.accent-theme {
+  background: linear-gradient(145deg, #ef4444, #b91c1c);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 35px rgba(220, 38, 38, 0.25);
+}
+.m-trust-card.accent-theme .m-trust-icon {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+.m-trust-card.accent-theme .m-trust-title { color: #ffffff; }
+.m-trust-card.accent-theme .m-trust-desc { color: #f87171; color: rgba(255,255,255,0.9); }
+.m-trust-card.accent-theme .m-trust-number { color: #ffffff; }
+
+/* Theme: Light */
+.m-trust-card.light-theme {
+  background: linear-gradient(145deg, #ffffff, #f8fafc);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+.m-trust-card.light-theme .m-trust-icon {
+  background: rgba(15, 23, 42, 0.05);
+  color: #0f172a;
+}
+.m-trust-card.light-theme .m-trust-title { color: #0f172a; }
+.m-trust-card.light-theme .m-trust-desc { color: #475569; }
+.m-trust-card.light-theme .m-trust-number { color: #0f172a; opacity: 0.03; }
+.m-trust-card.light-theme:hover .m-trust-number { opacity: 0.06; }
+
+/* Decorative top highlight for depth */
+.m-trust-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  opacity: 0.6;
+}
+.m-trust-card.dark-theme::before { background: linear-gradient(90deg, rgba(255,255,255,0.3), transparent); }
+.m-trust-card.accent-theme::before { background: linear-gradient(90deg, rgba(255,255,255,0.5), transparent); }
+.m-trust-card.light-theme::before { background: linear-gradient(90deg, rgba(15,23,42,0.1), transparent); }

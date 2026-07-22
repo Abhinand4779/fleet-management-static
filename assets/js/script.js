@@ -374,3 +374,49 @@ if (hero && heroImg) {
   updateUI();
   resetAuto();
 })();
+
+/* ==============================================
+   NUMBER COUNTING ANIMATION
+   ============================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const counters = document.querySelectorAll('.counter');
+  if (!counters.length) return;
+
+  const speed = 200; // Animation speed/steps
+
+  const animateCounters = () => {
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        
+        const inc = Math.max(1, target / speed);
+
+        if (count < target) {
+          counter.innerText = Math.ceil(count + inc);
+          setTimeout(updateCount, 15);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      
+      // Reset to 0 before starting
+      counter.innerText = '0';
+      updateCount();
+    });
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounters();
+        observer.unobserve(entry.target); 
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const statsSection = document.querySelector('.modern-stats-section');
+  if (statsSection) {
+    observer.observe(statsSection);
+  }
+});

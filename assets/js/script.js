@@ -66,7 +66,7 @@ function renderHeader() {
       </button>
       <ul class="nav-links" id="main-nav">
         ${navMarkup}
-        <li><a class="btn btn-download" href="/assets/downloads/Linking-Bridges-Company-Profile.pdf" download><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;vertical-align:middle;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Profile</a></li>
+        <li><a class="btn btn-download" href="javascript:void(0)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;vertical-align:middle;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Profile</a></li>
         <li><a class="btn btn-primary" href="/pages/contact.html">Request a Quote</a></li>
       </ul>
     </div>`;
@@ -105,7 +105,7 @@ function renderFooter() {
         </a>
         <p style="margin-bottom: 2rem;">Premium fleet management solutions with reliable transport, customs support, warehousing and delivery services tailored to demanding operations.</p>
         <div style="font-size:0.95rem; color:rgba(255,255,255,0.9);">
-          <strong style="color: white; font-size: 1.1rem; text-transform: uppercase;">Head Office</strong>
+          <strong style="color: white; font-size: 1.1rem; text-transform: uppercase;">Office Address</strong>
           <div style="margin-top:0.5rem; line-height:1.6; color:#a0a0a0;">
             7831, Al Khaboub, Al Fadeylah District<br />Jeddah, 22543<br />Kingdom of Saudi Arabia
           </div>
@@ -145,7 +145,7 @@ function renderFooter() {
         <p><strong>Phone:</strong> <a href="tel:+966553311591">+966553311591</a></p>
       </div>
       <div class="copyright">
-        <p>&copy; ${year} Linking Bridges. All rights reserved. ISO 9001 certified logistics operations.</p>
+        <p>&copy; ${year} Linking Bridges. All rights reserved.</p>
       </div>
     </div>`;
 }

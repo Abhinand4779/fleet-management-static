@@ -101,7 +101,7 @@ function renderFooter() {
     <div class="container footer-grid">
       <div>
         <a class="brand" href="/index.html" style="margin-bottom: 1.5rem; display:inline-flex; align-items:center;">
-          <img class="brand-wordmark" src="/assets/images/logo/Logo_black_to_white_2K_202607192047.png" alt="Linking Bridges Transportation Logo">
+          <img class="brand-wordmark" src="/assets/images/logo/Logo_black_to_white_2K_202607192047.png" alt="Linking Bridges Transportation Logo" style="max-height: 100px; width: auto; min-height: 80px;">
         </a>
         <p style="margin-bottom: 2rem;">Premium fleet management solutions with reliable transport, customs support, warehousing and delivery services tailored to demanding operations.</p>
         <div style="font-size:0.95rem; color:rgba(255,255,255,0.9); display: flex; flex-direction: column; gap: 1.25rem;">

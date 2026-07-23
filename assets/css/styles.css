@@ -2457,6 +2457,15 @@ img:not(.brand-wordmark):not([src*="logo"]):not([src*="ops/"]) {
   border-color: #000;
   background-color: rgba(0,0,0,0.05);
 }
+
+body.dark-page .btn-outline-dark {
+  color: #fff;
+  border-color: rgba(255,255,255,0.5);
+}
+body.dark-page .btn-outline-dark:hover {
+  border-color: #fff;
+  background-color: rgba(255,255,255,0.1);
+}
 .btn-white-full {
   background-color: #fff;
   color: #000;
@@ -2620,6 +2629,13 @@ img:not(.brand-wordmark):not([src*="logo"]):not([src*="ops/"]) {
 .pdf-affiliations {
   background: #f8f9fa;
   padding: 4rem 0;
+}
+
+body.dark-page .pdf-affiliations .pdf-section-title {
+  color: #141928 !important;
+}
+body.dark-page .pdf-affiliations .pdf-section-label {
+  color: #475569 !important;
 }
 .pdf-logos-row {
   display: flex;
@@ -2950,6 +2966,18 @@ img:not(.brand-wordmark):not([src*="logo"]):not([src*="ops/"]) {
   transform: scale(1.1);
 }
 
+/* Individual Logo Sizing Adjustments */
+.logo-carousel-track img.logo-alpha-star,
+.logo-carousel-track img.logo-partner-1,
+.logo-carousel-track img.logo-partner-4,
+.logo-carousel-track img.logo-partner-5,
+.logo-carousel-track img.logo-partner-img {
+  /* Reduce padding to give the inner logo more room to scale up, keeping outer card size the same (310x120) */
+  padding: 0 10px;
+  width: 290px;
+  height: 120px;
+}
+
 @keyframes logoScroll {
   0% {
     transform: translateX(0);
@@ -3008,7 +3036,7 @@ img:not(.brand-wordmark):not([src*="logo"]):not([src*="ops/"]) {
   color: rgba(255,255,255,0.85) !important;
   text-transform: capitalize !important;
   font-weight: 500 !important;
-  font-size: 0.95rem !important;
+  font-size: 1.15rem !important;
   letter-spacing: 0.3px !important;
   position: relative !important;
   padding-bottom: 6px !important;
@@ -3493,8 +3521,9 @@ body.dark-page .page-hero-image img {
 
 /* Content paragraphs and h3s in service detail pages */
 body.dark-page .pdf-partner-content p,
-body.dark-page .section-sm p {
-  color: #94a3b8 !important;
+body.dark-page .pdf-partner-content li {
+  color: rgba(255,255,255,0.95);
+  font-weight: 500;
   line-height: 1.7;
 }
 
@@ -4881,6 +4910,12 @@ body.dark-page main .premium-feature-card p {
   line-height: 1;
 }
 
+body.dark-page .typo-bg-number {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .typo-bg-number .counter {
   color: inherit;
   font-size: inherit;
@@ -4895,6 +4930,12 @@ body.dark-page main .premium-feature-card p {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transform: translateY(-8px);
+}
+
+body.dark-page .typo-stat-item:hover .typo-bg-number {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .typo-label {

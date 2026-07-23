@@ -328,9 +328,15 @@ textarea {
 .header-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 0.8rem 1.5rem;
-  gap: 1rem;
+  gap: 3.5rem;
+}
+
+@media (max-width: 1024px) {
+  .header-inner {
+    justify-content: space-between !important;
+  }
 }
 
 .brand {
@@ -2631,11 +2637,14 @@ body.dark-page .btn-outline-dark:hover {
   padding: 4rem 0;
 }
 
+body.dark-page .pdf-affiliations {
+  background: var(--dark) !important;
+}
 body.dark-page .pdf-affiliations .pdf-section-title {
-  color: #141928 !important;
+  color: #ffffff !important;
 }
 body.dark-page .pdf-affiliations .pdf-section-label {
-  color: #475569 !important;
+  color: #94a3b8 !important;
 }
 .pdf-logos-row {
   display: flex;
@@ -2936,6 +2945,12 @@ body.dark-page .pdf-affiliations .pdf-section-label {
   right: 0;
   background: linear-gradient(270deg, #f5f7fa 0%, transparent 100%);
 }
+body.dark-page .logo-carousel::before {
+  background: linear-gradient(90deg, var(--dark) 0%, transparent 100%);
+}
+body.dark-page .logo-carousel::after {
+  background: linear-gradient(270deg, var(--dark) 0%, transparent 100%);
+}
 
 .logo-carousel-track {
   display: flex;
@@ -3028,7 +3043,7 @@ body.dark-page .pdf-affiliations .pdf-section-label {
   object-fit: contain !important;
   margin-top: -30px !important;
   margin-bottom: -30px !important;
-  margin-right: 1.5rem !important;
+  margin-right: -80px !important;
   transform: translateX(-120px) !important;
 }
 
@@ -3106,7 +3121,7 @@ body.dark-page .pdf-affiliations .pdf-section-label {
     font-size: 0.85rem !important;
   }
   .site-header .brand-wordmark {
-    margin-right: 0.5rem !important;
+    margin-right: -20px !important;
     transform: translateX(-40px) !important;
   }
 }
@@ -4957,5 +4972,19 @@ body.dark-page .typo-stat-item:hover .typo-bg-number {
 @media (max-width: 640px) {
   .typography-stats-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Adjust header to bring links closer to logo on desktop */
+@media (min-width: 1025px) {
+  .site-header .header-inner {
+    justify-content: flex-start !important;
+    gap: 3.5rem !important;
+  }
+  .site-header .nav-links {
+    flex: 1 !important;
+  }
+  .site-header .container {
+    padding-right: 0.5rem !important;
   }
 }

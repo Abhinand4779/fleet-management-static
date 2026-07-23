@@ -66,8 +66,8 @@ function renderHeader() {
       </button>
       <ul class="nav-links" id="main-nav">
         ${navMarkup}
-        <li><a class="btn btn-download" href="javascript:void(0)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;vertical-align:middle;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Profile</a></li>
-        <li><a class="btn btn-primary" href="/pages/contact.html">Request a Quote</a></li>
+        <li style="margin-left: auto;"><a class="btn btn-download" href="javascript:void(0)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;vertical-align:middle;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Profile</a></li>
+        <li style="margin-right: -1rem;"><a class="btn btn-primary" href="/pages/contact.html">Request a Quote</a></li>
       </ul>
     </div>`;
 
@@ -151,6 +151,14 @@ function renderFooter() {
       <div class="contact-info">
         <p><strong>Email:</strong> <a href="mailto:info@linkingbridges.net">info@linkingbridges.net</a></p>
         <p><strong>Phone:</strong> <a href="tel:+966553311591">+966553311591</a></p>
+      </div>
+      <div class="social-links" style="display:flex; gap:1.25rem; align-items:center;">
+        <a href="https://www.instagram.com/linkingbridgestra/" target="_blank" aria-label="Instagram" style="display:flex; align-items:center; justify-content:center; width:36px; height:36px; background:rgba(255,255,255,0.05); border-radius:50%; transition:background 0.3s ease, color 0.3s ease;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61591867538470" target="_blank" aria-label="Facebook" style="display:flex; align-items:center; justify-content:center; width:36px; height:36px; background:rgba(255,255,255,0.05); border-radius:50%; transition:background 0.3s ease, color 0.3s ease;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
       </div>
       <div class="copyright">
         <p>&copy; ${year} Linking Bridges. All rights reserved.</p>

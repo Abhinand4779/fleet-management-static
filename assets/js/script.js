@@ -23,7 +23,7 @@ const navItems = [
   { label: 'Home', href: '/index.html' },
   { label: 'About', href: '/pages/about.html' },
   { label: 'Our Fleet', href: '/pages/fleet.html' },
-  { label: 'Operations', href: '/pages/operations.html' },
+
   { label: 'Services', href: '/pages/services.html', children: [
     { label: 'Customs Clearance', href: '/pages/customs-clearance.html' },
     { label: 'Transportation Services', href: '/pages/transportation-services.html' },
@@ -116,7 +116,7 @@ function renderFooter() {
         <ul>
           <li><a href="/pages/about.html">About</a></li>
           <li><a href="/pages/fleet.html">Our Fleet</a></li>
-          <li><a href="/pages/operations.html">Operations</a></li>
+
           <li><a href="/pages/gallery.html">Gallery</a></li>
         </ul>
       </div>

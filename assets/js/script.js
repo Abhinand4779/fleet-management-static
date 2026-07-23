@@ -104,10 +104,18 @@ function renderFooter() {
           <img class="brand-wordmark" src="/assets/images/logo/Logo_black_to_white_2K_202607192047.png" alt="Linking Bridges Transportation Logo">
         </a>
         <p style="margin-bottom: 2rem;">Premium fleet management solutions with reliable transport, customs support, warehousing and delivery services tailored to demanding operations.</p>
-        <div style="font-size:0.95rem; color:rgba(255,255,255,0.9);">
-          <strong style="color: white; font-size: 1.1rem; text-transform: uppercase;">Office Address</strong>
-          <div style="margin-top:0.5rem; line-height:1.6; color:#a0a0a0;">
-            7831, Al Khaboub, Al Fadeylah District<br />Jeddah, 22543<br />Kingdom of Saudi Arabia
+        <div style="font-size:0.95rem; color:rgba(255,255,255,0.9); display: flex; flex-direction: column; gap: 1.25rem;">
+          <div>
+            <strong style="color: white; font-size: 1.1rem; text-transform: uppercase;">Jeddah Office</strong>
+            <div style="margin-top:0.5rem; line-height:1.6; color:#a0a0a0;">
+              7831, Al Khaboub, Al Fadeylah District<br />Jeddah, 22543<br />Kingdom of Saudi Arabia
+            </div>
+          </div>
+          <div>
+            <strong style="color: white; font-size: 1.1rem; text-transform: uppercase;">Riyadh Office</strong>
+            <div style="margin-top:0.5rem; line-height:1.6; color:#a0a0a0;">
+              Abdullah Bin Faryan, As Sulay<br />Riyadh, 14267<br />Kingdom of Saudi Arabia
+            </div>
           </div>
         </div>
       </div>

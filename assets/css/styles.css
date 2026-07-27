@@ -4985,6 +4985,8 @@ body.dark-page .typo-stat-item:hover .typo-bg-number {
   }
   .site-header .nav-links {
     flex: 1 !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
   }
   .site-header .container {
     padding-right: 0.5rem !important;

@@ -210,14 +210,23 @@ function handleForm() {
     event.preventDefault();
     const button = form.querySelector('button[type="submit"]');
     if (button) {
-      button.textContent = 'Request Sent';
+      button.textContent = 'Redirecting to WhatsApp...';
       button.disabled = true;
     }
-    const status = document.createElement('p');
-    status.textContent = 'Thank you. Our team will respond within one business day.';
-    status.style.color = 'var(--accent)';
-    status.style.fontWeight = '700';
-    form.appendChild(status);
+    
+    const name = document.getElementById('q_name') ? document.getElementById('q_name').value : 'N/A';
+    const company = document.getElementById('q_company') ? document.getElementById('q_company').value : 'N/A';
+    const email = document.getElementById('q_email') ? document.getElementById('q_email').value : 'N/A';
+    const phone = document.getElementById('q_phone') ? document.getElementById('q_phone').value : 'N/A';
+    const fleet = document.getElementById('q_fleet') ? document.getElementById('q_fleet').value : 'N/A';
+    const service = document.getElementById('q_service') ? document.getElementById('q_service').value : 'N/A';
+    const message = document.getElementById('q_message') ? document.getElementById('q_message').value : 'N/A';
+    
+    const text = `*New Quote Request*%0A%0A*Name:* ${name}%0A*Company:* ${company}%0A*Email:* ${email}%0A*Phone:* ${phone}%0A*Fleet Size:* ${fleet}%0A*Service Required:* ${service}%0A*Message:* ${message}`;
+    const whatsappUrl = `https://wa.me/966553311591?text=${text}`;
+    
+    // Redirect current tab to WhatsApp to avoid popup blockers
+    window.location.href = whatsappUrl;
   });
 }
 

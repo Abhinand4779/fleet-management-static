@@ -35,22 +35,23 @@
       <div class="quote-panel reveal">
         <h3>Request a Quote</h3>
         <p>Fill in your details and a member of our team will prepare a proposal aligned to your requirements.</p>
-        <form class="quote-form">
-          <label>Name<input type="text" placeholder="Your name" /></label>
-          <label>Company<input type="text" placeholder="Company name" /></label>
-          <label>Email<input type="email" placeholder="you@company.com" /></label>
-          <label>Phone<input type="tel" placeholder="Phone number" /></label>
-          <label>Fleet size<input type="text" placeholder="e.g. 50 vehicles" /></label>
-          <label>Service<select>
+        <form class="quote-form" id="quote-form">
+          <label>Name<input type="text" id="q_name" placeholder="Your name" required /></label>
+          <label>Company<input type="text" id="q_company" placeholder="Company name" /></label>
+          <label>Email<input type="email" id="q_email" placeholder="you@company.com" /></label>
+          <label>Phone<input type="tel" id="q_phone" placeholder="Phone number" required /></label>
+          <label>Fleet size<input type="text" id="q_fleet" placeholder="e.g. 50 vehicles" /></label>
+          <label>Service<select id="q_service">
             <option>Customs Clearance</option>
             <option>Transportation</option>
             <option>Warehousing</option>
             <option>Packaging &amp; Moving</option>
             <option>Storage &amp; Delivery</option>
           </select></label>
-          <label>Message<textarea placeholder="Tell us about your current needs"></textarea></label>
-          <button class="btn btn-primary" type="submit">Send Message</button>
+          <label>Message<textarea id="q_message" placeholder="Tell us about your current needs"></textarea></label>
+          <button class="btn btn-primary" type="submit">Send via WhatsApp</button>
         </form>
+
       </div>
 
       <!-- Contact Info -->
